@@ -26,7 +26,7 @@ public class Builder extends cilantro.Main {
 	
 	public Integer execute(List<String> parameters, Map<String, String> options) throws Exception {
 		println("------------------------------------------");
-		println("${format(Jetpack - Native Executable Builder, blue, bold)} ${format(v1.0.0, yellow)}");
+		println("${format(Jetpack - Native Executable Builder, blue, bold)} ${format(v" + Version.getVersion() + ", yellow)}");
 		println("------------------------------------------");
 
 		if (parameters.size() < 2)
