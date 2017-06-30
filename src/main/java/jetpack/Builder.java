@@ -25,11 +25,14 @@ public class Builder extends cilantro.Main {
 	}
 	
 	public Integer execute(List<String> parameters, Map<String, String> options) throws Exception {
-		return build(
-			configuration(parameters.get(0, "sample"), parameters.get(1, "sample.Main")),
-			list(parameters.get(2, "linux,windows").toUpperCase().split(",")), 
-			new File(parameters.get(3, "build"))
-		);
+		if (parameters.size() < 2)
+			return help();
+		
+		return build(parameters.get(0, "sample"), parameters.get(1, "sample.Main"), list(parameters.get(2, "linux,windows").toUpperCase().split(",")), new File(parameters.get(3, "build")));
+	}
+	
+	public Integer build(String name, String main, List<String> platforms, File directory) throws Exception {
+		return build(configuration(name, main), platforms, directory);
 	}
 	
 	public Integer build(Configuration configuration, List<String> platforms, File directory) throws Exception {
@@ -41,6 +44,17 @@ public class Builder extends cilantro.Main {
 	
 	public Integer build(Configuration configuration, String platform, File directory) throws Exception {
 		return new Generator().generate(toStorkConfiguration(configuration, platform), directory);
+	}
+	
+	protected Integer help() {
+		println();
+		println("Usage: jetpack [name] [main] [platforms] [directory]");
+		println("  - name:       name of executable to generate");
+		println("  - main:       name of class with main() that should be launched");
+		println("  - platforms:  plaforms to generate executables (linux|window default both)");
+		println("  - directory:  directory that executables should be built");
+		println();
+		return 0;
 	}
 	
 	protected Configuration configuration(String name, String main) {
