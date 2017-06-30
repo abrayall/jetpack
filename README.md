@@ -15,7 +15,7 @@ Jetpack v1.0 current can generate sophisticated shell scripts for your Java app 
  where: 
   - name:       name of executable to generate
   - main:       name of class with main() that should be launched
-  - platforms:  plaforms to generate executables (linux|window - default both)
+  - platforms:  platforms to generate executables (linux|window - default both)
   - directory:  directory that executables should be built
   
 ```
