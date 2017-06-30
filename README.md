@@ -16,3 +16,12 @@ Jetpack is a build tool that can convert Java applications into native executabl
  - Use java to build zip/tar/tar.gz files
  - Use javapackager to build DMG file for MacOS
  - Use javapackager to build deb and rpm files for Linux
+ 
+ 
+##### Layouts
+  - Universal
+  - Linux
+  - Windows
+  - MacOS
+  
+  
