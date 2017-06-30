@@ -19,5 +19,10 @@ Jetpack [v1.0](https://github.com/abrayall/jetpack/releases/download/v1.0.0/jetp
   - directory:  directory that executables should be built
   
 ```
-  
+
+### Schedule
+ - [x] [v1.0.0](https://github.com/abrayall/jetpack/releases/download/v1.0.0/jetpack.tar) - Support generating shell and batch scripts
+ - [ ] v1.1.0 - Support generating .exe executables
+ - [ ] v1.2.0 - Support generating MacOS applications
+ - [ ] v1.3.0 - Support generating universal tar/zip files
   
