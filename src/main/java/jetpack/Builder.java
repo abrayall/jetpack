@@ -25,6 +25,10 @@ public class Builder extends cilantro.Main {
 	}
 	
 	public Integer execute(List<String> parameters, Map<String, String> options) throws Exception {
+		println("------------------------------------------");
+		println("${format(Jetpack - Native Executable Builder, blue, bold)} ${format(v1.0.0, yellow)}");
+		println("------------------------------------------");
+
 		if (parameters.size() < 2)
 			return help();
 		
@@ -39,10 +43,12 @@ public class Builder extends cilantro.Main {
 		for (String platform : platforms)
 			build(configuration, platform, directory);
 		
+		println("Build complete.");
 		return 0;
 	}
 	
-	public Integer build(Configuration configuration, String platform, File directory) throws Exception {
+	protected Integer build(Configuration configuration, String platform, File directory) throws Exception {
+		println("Building executable ${0} [${1}] for ${2}...", configuration.name, configuration.main, platform.toLowerCase());
 		return new Generator().generate(toStorkConfiguration(configuration, platform), directory);
 	}
 	
