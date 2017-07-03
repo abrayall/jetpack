@@ -10,5 +10,7 @@
 	<classpathentry kind="lib" path="lib/main/org.freemarker.freemarker-2.3.21.jar"/>
 	<classpathentry kind="lib" path="lib/main/com.fizzed.stork-core-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/main/com.fizzed.stork-launcher-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/main/launch4j.jar"/>
+	<classpathentry kind="lib" path="lib/main/xstream.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
