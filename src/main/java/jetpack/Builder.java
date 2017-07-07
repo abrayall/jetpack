@@ -1,9 +1,13 @@
 package jetpack;
 
+import static javax.io.File.*;
 import static javax.util.List.*;
 
-import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 
+import javax.io.File;
+import javax.net.Urls;
 import javax.util.List;
 import javax.util.Map;
 
@@ -31,9 +35,9 @@ public class Builder extends cilantro.Main {
 	}
 	
 	public Integer build(String name, String main, List<String> platforms, File directory) throws Exception {
-		return new Stork().build(name, main, platforms, directory, console);
+		return new Stork().build(configuration(name, main), platforms, directory, console);
 	}
-
+	
 	protected Integer help() {
 		println();
 		println("Usage: jetpack [name] [main] [platforms] [directory]");
@@ -44,6 +48,26 @@ public class Builder extends cilantro.Main {
 		println();
 		return 0;
 	}
+
+	
+	protected Configuration configuration(String name, String main) throws Exception {
+		return configuration(name, main, List.list(file(".").search(".*\\.jar")));
+	}
+	
+	protected Configuration configuration(String name, String main, List<File> classpath) throws Exception {
+		try (URLClassLoader classloader = new URLClassLoader(urls(classpath))) {
+			return configuration(name, main, classloader.loadClass(main).getProtectionDomain().getCodeSource().getLocation().toString(), classpath);
+		}
+	}
+	
+	protected Configuration configuration(String name, String main, String jar, List<File> classpath) {
+		return new Configuration().setName(name).setMain(main).setJar(jar).setClasspath(classpath);
+	}
+	
+	protected URL[] urls(List<File> classpath) {
+		return classpath.map(file -> Urls.url(file.toFile().toURI())).toArray(new URL[0]);
+	}
+	
 	public static void main(String[] arguments) throws Exception {
 		main(Builder.class, arguments);
 	}
