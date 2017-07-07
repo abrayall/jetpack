@@ -1,10 +1,10 @@
 package jetpack.stork;
 
-import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.util.List;
+import javax.io.File;
 
 import com.fizzed.stork.launcher.Generator;
 
@@ -16,10 +16,6 @@ import com.fizzed.stork.launcher.Configuration.Type;
 import jetpack.Configuration;
 
 public class Stork {
-	public Integer build(String name, String main, List<String> platforms, File directory, Console console) throws Exception {
-		return build(configuration(name, main), platforms, directory, console);
-	}
-	
 	public Integer build(Configuration configuration, List<String> platforms, File directory, Console console) throws Exception {
 		for (String platform : platforms)
 			build(configuration, platform, directory, console);
@@ -30,7 +26,7 @@ public class Stork {
 	
 	protected Integer build(Configuration configuration, String platform, File directory, Console console) throws Exception {
 		console.printlnf("Building executable ${0} [${1}] for ${2}...", configuration.getName(), configuration.getMain(), platform.toLowerCase());
-		return new Generator().generate(toStorkConfiguration(configuration, platform), directory);
+		return new Generator().generate(toStorkConfiguration(configuration, platform), directory.toFile());
 	}
 	
 	protected Configuration configuration(String name, String main) {
@@ -39,7 +35,7 @@ public class Stork {
 	
 	protected com.fizzed.stork.launcher.Configuration toStorkConfiguration(Configuration configuration, String platform) {
 		com.fizzed.stork.launcher.Configuration stork = new com.fizzed.stork.launcher.Configuration();
-		stork.setFile(new File("test.yaml"));
+		stork.setFile(new File("test.yaml").toFile());
 		stork.setName(configuration.getName());
 		stork.setType(Type.CONSOLE);
 		stork.setMainClass(configuration.getMain());
