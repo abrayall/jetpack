@@ -1,10 +1,16 @@
 package jetpack;
 
+import javax.io.File;
+import javax.util.List;
+
 public class Configuration {
 	
 	protected String name;
 	protected String main;
 	protected String type = "console";
+	
+	protected String jar;
+	protected List<File> classpath;
 	
 	public String getName() {
 		return this.name;
@@ -33,4 +39,21 @@ public class Configuration {
 		return this;
 	}
 	
+	public String getJar() {
+		return this.jar;
+	}
+
+	public Configuration setJar(String jar) {
+		this.jar = jar;
+		return this;
+	}
+
+	public List<File> getClasspath() {
+		return this.classpath;
+	}
+
+	public Configuration setClasspath(List<File> classpath) {
+		this.classpath = classpath;
+		return this;
+	}
 }
