@@ -69,6 +69,6 @@ public class Jre {
 	}
 	
 	public File getJava() {
-		return new File(path, "bin/java" + (this.platform.equals(Jre.PLATFORM_WINDOWS) ? ".exe" : ""));
+		return new File(path, "/bin/java" + (this.platform.equals(Jre.PLATFORM_WINDOWS) ? ".exe" : ""));
 	}
 }

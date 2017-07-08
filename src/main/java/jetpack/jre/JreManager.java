@@ -81,7 +81,7 @@ public class JreManager {
 	}
 	
 	protected File path(String version, String platform, String bits) {
-		return file(work, "/java/" + platform + "/" + version + "/" + bits + "bit");
+		return file(work, platform + "/" + version + "/" + bits + "bit" + "/jre");
 	}
 	
 	protected File resolve(Jre jre, ZipEntry entry, File file) {
@@ -90,10 +90,9 @@ public class JreManager {
 	
 	public static void main(String[] arguments) throws Exception {
 		JreManager manager = new JreManager(new File("/tmp/java"));
-		Jre jre = manager.get(Jre.VERSION_1_8, Jre.PLATFORM_LINUX, Jre.BIT_64);
-		//if (jre.path.exists() == false)
+		Jre jre = manager.get(Jre.VERSION_1_8, Jre.PLATFORM_WINDOWS, Jre.BIT_64);
+		if (jre.path.exists() == false)
 			manager.download(jre, JreManager::downloaded, JreManager::extracted);
-			
 	}
 	
 	public static BiConsumer<Long, Long> downloaded(String format) {
