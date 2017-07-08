@@ -37,8 +37,8 @@
 			<fileset dir="${basedir}" includes="version.properties" />
 			<fileset dir="${build.dir}/work/bin" includes="**/*.class" />
 		</jar>
-		<java classname="jetpack.Builder" taskname="jetpack">
-			<arg line="jetpack jetpack.Builder linux,windows ${build.dir}/work/scripts" />
+		<java classname="jetpack.Engine" taskname="jetpack">
+			<arg line="jetpack jetpack.Engine linux,windows ${build.dir}/work/scripts" />
 			<classpath>
 				<fileset dir="${library.dir}/main" includes="*.jar" />
 				<fileset dir="${build.dir}/artifacts" includes="*.jar" />
