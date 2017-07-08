@@ -6,6 +6,8 @@ import javax.util.List;
 public class Configuration {
 	
 	protected String name;
+	protected String version = "";
+
 	protected String main;
 	protected String type = "console";
 	
@@ -18,6 +20,15 @@ public class Configuration {
 	
 	public Configuration setName(String name) {
 		this.name = name;
+		return this;
+	}
+	
+	public String getVersion() {
+		return this.version;
+	}
+	
+	public Configuration setVersion(String version) {
+		this.version = version;
 		return this;
 	}
 	
