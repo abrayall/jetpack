@@ -45,11 +45,11 @@ public class Launch4J {
 		Config config = ConfigPersister.getInstance().getConfig();
 
 		Jre jre = new Jre();
-		jre.setPath("1.8.0");
+		jre.setPath("jre");
 		
 		ClassPath classpath = new ClassPath();
 		classpath.setMainClass(configuration.getMain());
-		classpath.setPaths(list());
+		classpath.setPaths(configuration.getClasspath().map(file -> file.relative(file("."))));
 		
 		config.setClassPath(classpath);
 		config.setJar(file(configuration.getJar()).toFile());
