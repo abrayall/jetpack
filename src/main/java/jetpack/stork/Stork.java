@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.util.List;
+
+import org.slf4j.LoggerFactory;
+
 import javax.io.File;
 
 import com.fizzed.stork.launcher.Generator;
@@ -13,20 +16,29 @@ import cilantro.io.Console;
 import com.fizzed.stork.launcher.Configuration.Platform;
 import com.fizzed.stork.launcher.Configuration.Type;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 import jetpack.Configuration;
 
 public class Stork {
-	public Integer build(Configuration configuration, List<String> platforms, File directory, Console console) throws Exception {
-		for (String platform : platforms)
-			build(configuration, platform, directory, console);
-		
-		console.println("Build complete.");
-		return 0;
+	static {
+		((Logger)LoggerFactory.getLogger("com.fizzed")).setLevel(Level.OFF);
 	}
 	
-	protected Integer build(Configuration configuration, String platform, File directory, Console console) throws Exception {
-		console.printlnf("Building executable ${0} [${1}] for ${2}...", configuration.getName(), configuration.getMain(), platform.toLowerCase());
-		return new Generator().generate(toStorkConfiguration(configuration, platform), directory.toFile());
+	public List<File> generate(Configuration configuration, List<String> platforms, File directory, Console console) throws Exception {
+		return platforms.map(platform -> {
+			try {
+				return generate(configuration, platform, directory, console);
+			} catch (Exception e) {
+				return null;
+			}
+		});
+	}
+	
+	public File generate(Configuration configuration, String platform, File directory, Console console) throws Exception {
+		console.printlnf("Generating executable ${0} [${1}] for ${2}...", configuration.getName(), configuration.getMain(), platform.toLowerCase());
+		new Generator().generate(toStorkConfiguration(configuration, platform), directory.toFile());
+		return new File(directory, "bin/" + configuration.getName() + (platform.equalsIgnoreCase("windows") ? ".bat" : ""));
 	}
 	
 	protected Configuration configuration(String name, String main) {
