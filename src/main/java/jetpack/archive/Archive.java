@@ -23,8 +23,14 @@ public class Archive {
 	}
 	
 	public static File tar(File directory, File file, String pattern) throws Exception {
-		archive(directory, new TarArchiveOutputStream(file.outputStream()), pattern);
+		archive(directory, tar(file.outputStream()), pattern);
 		return file;
+	}
+	
+	protected static TarArchiveOutputStream tar(OutputStream outputStream) {
+		TarArchiveOutputStream tar = new TarArchiveOutputStream(outputStream);
+		tar.setLongFileMode(TarArchiveOutputStream.LONGFILE_POSIX);
+		return tar;
 	}
 	
 	public static File zip(File directory) throws Exception {
