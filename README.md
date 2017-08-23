@@ -26,3 +26,8 @@ Jetpack [v1.0.0](https://github.com/abrayall/jetpack/releases/download/v1.0.0/je
  - [ ] v1.2.0 - Support generating MacOS applications
  - [ ] v1.3.0 - Support generating universal tar/zip files
   
+
+
+#### Design Notes
+jetpack [executable|package] [descriptor] [platforms] [directory]
+jetpack [executable|package] [name] [main] [platforms] [directory]
