@@ -61,6 +61,7 @@ public class JreManager {
 	public Jre download(Jre jre, BiConsumer<Long, Long> download, BiConsumer<ZipEntry, File> extract) throws Exception {
 		unzip(Urls.download(jre.url, file(jre.path, "jre.zip"), download), file(jre.path, "jre"), (entry, file) -> {
 			File resolved = resolve(jre, entry, file);
+			System.out.println(jre + " " + entry + " " + file + " " + resolved);
 			extract.accept(entry, resolved);
 			return resolved;
 		});
@@ -81,7 +82,7 @@ public class JreManager {
 	}
 	
 	protected File path(String version, String platform, String bits) {
-		return file(work, platform + "/" + version + "/" + bits + "bit" + "/jre");
+		return file(work, platform + "/" + version + "/" + bits + "bit");
 	}
 	
 	protected File resolve(Jre jre, ZipEntry entry, File file) {
@@ -90,7 +91,7 @@ public class JreManager {
 	
 	public static void main(String[] arguments) throws Exception {
 		JreManager manager = new JreManager(new File("/tmp/java"));
-		Jre jre = manager.get(Jre.VERSION_1_8, Jre.PLATFORM_WINDOWS, Jre.BIT_64);
+		Jre jre = manager.get(Jre.VERSION_1_8, Jre.PLATFORM_MACOS, Jre.BIT_32);
 		if (jre.path.exists() == false)
 			manager.download(jre, JreManager::downloaded, JreManager::extracted);
 	}
