@@ -61,7 +61,6 @@ public class JreManager {
 	public Jre download(Jre jre, BiConsumer<Long, Long> download, BiConsumer<ZipEntry, File> extract) throws Exception {
 		unzip(Urls.download(jre.url, file(jre.path, "jre.zip"), download), file(jre.path, "jre"), (entry, file) -> {
 			File resolved = resolve(jre, entry, file);
-			System.out.println(jre + " " + entry + " " + file + " " + resolved);
 			extract.accept(entry, resolved);
 			return resolved;
 		});
