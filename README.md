@@ -29,5 +29,5 @@ Jetpack [v1.0.0](https://github.com/abrayall/jetpack/releases/download/v1.0.0/je
 
 
 #### Design Notes
-jetpack [executable|package] [descriptor] [platforms] [directory]
-jetpack [executable|package] [name] [main] [platforms] [directory]
+  - jetpack [executable|package] [descriptor] [platforms] [directory]
+  - jetpack [executable|package] [name] [main] [platforms] [directory]
