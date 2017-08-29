@@ -2,6 +2,7 @@ package jetpack;
 
 import javax.io.File;
 import javax.util.List;
+import static javax.util.List.*;
 
 public class Configuration {
 	
@@ -12,7 +13,7 @@ public class Configuration {
 	protected String type = "console";
 	
 	protected String jar;
-	protected List<File> classpath;
+	protected List<File> classpath = list();
 	
 	public String getName() {
 		return this.name;

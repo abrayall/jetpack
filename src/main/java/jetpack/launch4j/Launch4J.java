@@ -1,7 +1,6 @@
 package jetpack.launch4j;
 
 import static javax.io.File.*;
-import static javax.util.List.*;
 
 import javax.io.File;
 import javax.lang.System;
@@ -45,7 +44,8 @@ public class Launch4J {
 		Config config = ConfigPersister.getInstance().getConfig();
 
 		Jre jre = new Jre();
-		jre.setPath("jre");
+		jre.setMinVersion("1.8.0");
+		//jre.setPath("jre");
 		
 		ClassPath classpath = new ClassPath();
 		classpath.setMainClass(configuration.getMain());

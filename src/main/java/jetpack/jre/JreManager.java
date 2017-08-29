@@ -81,7 +81,7 @@ public class JreManager {
 	}
 	
 	protected File path(String version, String platform, String bits) {
-		return file(work, platform + "/" + version + "/" + bits + "bit" + "/jre");
+		return file(work, platform + "/" + version + "/" + bits + "bit");
 	}
 	
 	protected File resolve(Jre jre, ZipEntry entry, File file) {
@@ -90,7 +90,7 @@ public class JreManager {
 	
 	public static void main(String[] arguments) throws Exception {
 		JreManager manager = new JreManager(new File("/tmp/java"));
-		Jre jre = manager.get(Jre.VERSION_1_8, Jre.PLATFORM_WINDOWS, Jre.BIT_64);
+		Jre jre = manager.get(Jre.VERSION_1_8, Jre.PLATFORM_MACOS, Jre.BIT_32);
 		if (jre.path.exists() == false)
 			manager.download(jre, JreManager::downloaded, JreManager::extracted);
 	}
